@@ -60,7 +60,21 @@ public class SalesPersonControllerImp {
 	@PostMapping("/sales_persons/add")
 	public String saveSalesPerson(Model model,  Salesperson sales_person) {
 		try {
-			salesPersonService.add(sales_person, sales_person.getSalesterritory().getTerritoryid(), sales_person.getBusinessentityid());
+			if(sales_person.getBusinessentityid()==-1) {
+				Businessentity be = new Businessentity();
+				businessentityRepository.save(be);
+				
+				Businessentity last = null;
+				for(Businessentity aux : businessentityRepository.findAll()) {
+					if(last==null) {
+						last = aux;
+					}else if(aux.getBusinessentityid()>last.getBusinessentityid()) {
+						last = aux;
+					}
+				}
+				sales_person.setBusinessentityid(last.getBusinessentityid());
+			}
+			salesPersonService.add(sales_person,  sales_person.getBusinessentityid(),sales_person.getSalesterritory().getTerritoryid());
 		} catch (InvalidValueException | ObjectAlreadyExistException | ObjectDoesNotExistException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

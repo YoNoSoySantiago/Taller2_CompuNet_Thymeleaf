@@ -43,7 +43,7 @@ public class SalesPersonServiceImp implements SalesPersonService {
 		) {
 			throw new NullPointerException("Empty values or nulls");
 		}
-		
+		System.out.println(BusinessId);
 		Optional<Salesperson> person = findById(BusinessId);
 		if(person.isEmpty()) {
 			if(salesPerson.getSalesquota().compareTo(BigDecimal.ZERO)<0) {
