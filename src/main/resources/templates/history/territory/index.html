@@ -40,16 +40,16 @@
 								<td class="text-info" th:text="${territory_history.enddate}"></td>
 								<td class="text-info" th:text="${territory_history.modifieddate}"></td>
 								<td><a th:href="@{/territories_history/edit/{id}(id=${territory_history.id})}"
-									class="btn btn-primary"><i class="fas fa-territory_history-edit ml-2"></i></a></td>
+									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/territories_history/del/{id}(id=${territory_history.id})}"
-									class="btn btn-primary"><i class="fas fa-territory_history-times ml-2"></i></a></td>
+									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p class="my-5">
 					<a href="/territories_history/add" class="btn btn-primary"><i
-						class="fas fa-territory_history-plus ml-2"></i></a>
+						class="fas fa-user-plus ml-2"></i></a>
 				</p>
 			</div>
 		</div>

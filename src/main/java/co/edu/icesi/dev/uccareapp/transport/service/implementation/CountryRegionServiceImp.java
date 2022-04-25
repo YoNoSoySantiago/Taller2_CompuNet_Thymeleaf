@@ -36,5 +36,4 @@ public class CountryRegionServiceImp implements CountryRegionService {
 	public void clear() {
 		this.countryRegionRepository.deleteAll();
 	}
-
 }

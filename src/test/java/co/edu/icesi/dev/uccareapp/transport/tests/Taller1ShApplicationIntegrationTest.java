@@ -6,10 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -64,14 +62,6 @@ class Taller1ShApplicationIntegrationTest {
 		this.countryRegionService = crs;
 		setUpInstantiate();
 	}
-	
-//	@AfterEach
-//	void clean() {
-//		salesPersonService.clear();
-//		salesPersonQuotaHistoryService.clear();
-//		salesTerritoryService.clear();
-//		salesTerritoryHistoryService.clear();
-//	}
 	
 	void setUpInstantiate() {
 		Businessentity businessEntity = new Businessentity();

@@ -41,16 +41,16 @@
 								<td class="text-info" th:text="${person_history.gender}"></td>
 								<td class="text-info" th:text="${person_history.birthDate}"></td>
 								<td><a th:href="@{/persons_history/edit/{id}(id=${person_history.id})}"
-									class="btn btn-primary"><i class="fas fa-person_history-edit ml-2"></i></a></td>
+									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 								<td><a th:href="@{/persons_history/del/{id}(id=${person_history.id})}"
-									class="btn btn-primary"><i class="fas fa-person_history-times ml-2"></i></a></td>
+									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p class="my-5">
 					<a href="/persons_history/add" class="btn btn-primary"><i
-						class="fas fa-person_history-plus ml-2"></i></a>
+						class="fas fa-user-plus ml-2"></i></a>
 				</p>
 			</div>
 		</div>

@@ -1,5 +1,9 @@
 package co.edu.icesi.dev.uccareapp.transport;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,8 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.UserApp;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.UserType;
+import co.edu.icesi.dev.uccareapp.transport.repository.CountryRegionRepository;
 import co.edu.icesi.dev.uccareapp.transport.repository.UserRepository;
 
 @SpringBootApplication
@@ -24,7 +30,7 @@ public class Taller1ShApplication {
 	}
 
 	@Bean
-	public CommandLineRunner clr(UserRepository userRepository) {
+	public CommandLineRunner clr(UserRepository userRepository,CountryRegionRepository countryRegionRepository) {
 		return (args->{
 			UserApp userAdmin = new UserApp();
 			userAdmin.setUsername("YoNoSoySantiago");
@@ -38,6 +44,16 @@ public class Taller1ShApplication {
 			
 			userRepository.save(userAdmin);
 			userRepository.save(userOp);
+			File file = new File("data\\countryRegion.txt");
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String str = br.readLine();
+			while(str!=null) {
+				Countryregion cr = new Countryregion();
+				cr.setName(str);
+				countryRegionRepository.save(cr);
+				str = br.readLine(); 
+			}
+			br.close();
 		});
 	}
 }
