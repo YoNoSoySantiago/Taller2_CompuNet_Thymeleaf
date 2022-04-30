@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 
 /**
  * The persistent class for the salesterritory database table.
@@ -37,6 +38,7 @@ public class Salesterritory implements Serializable {
 
 	private Timestamp modifieddate;
 
+	@Size(min=5)
 	private String name;
 
 	private Integer rowguid;

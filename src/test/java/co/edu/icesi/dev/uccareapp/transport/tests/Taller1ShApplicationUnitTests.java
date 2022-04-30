@@ -22,7 +22,7 @@ import org.mockito.quality.Strictness;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.dev.uccareapp.transport.Taller1ShApplication;
+import co.edu.icesi.dev.uccareapp.transport.Taller2ShApplication;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.InvalidValueException;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Businessentity;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
@@ -45,7 +45,7 @@ import co.edu.icesi.dev.uccareapp.transport.service.interfaces.SalesPersonServic
 import co.edu.icesi.dev.uccareapp.transport.service.interfaces.SalesTerritoryHistoryService;
 import co.edu.icesi.dev.uccareapp.transport.service.interfaces.SalesTerritoryService;
 
-@SpringBootTest(classes= Taller1ShApplication.class)
+@SpringBootTest(classes= Taller2ShApplication.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
 @TestInstance(Lifecycle.PER_CLASS)
 class Taller1ShApplicationUnitTests {

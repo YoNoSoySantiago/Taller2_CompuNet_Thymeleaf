@@ -1,36 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Update User</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
-<link rel="stylesheet" href="../css/shards.min.css">
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Update User</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+		integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+		integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/shards.min.css">
 </head>
+
 <body>
 	<div class="container my-5">
-		<h2 class="mb-5">Update User</h2>
+		<h2 class="mb-5">Update Sales Person</h2>
 		<div class="row">
-			<div class="col-md-5">
-				<form action="#" th:object="${user}"
-					th:action="@{/users/edit/{id}(id=${user.id})}" method="post">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/sales_persons/edit/{id}(id=${sales_person.businessentityid})}" th:object="${sales_person}" method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
-							<label for="type" class="col-form-label">Business Entity</label> 
-							<select class="form-control-range" th:field="*{id}">
-								<option class="form-control" th:text="New Business Entity" ></option>
-								<option th:each="tp : ${types}" th:value="${id}" class="form-control" th:text="${id}" th:selected="${salesPerson.type=tp}"></option>
-							</select>
+							<label  for="businessentityid" class="col-form-label">Sales Person ID</label> 
+							<input disabled type="text" th:field="*{businessentityid}" class="form-control" id="businessentityid" placeholder="Ej: 650000"> 
 						</div>
 						<div class="form-group col-md-6">
 							<label for="type" class="col-form-label">Sales Territory</label> 
-							<select class="form-control-range" th:field="*{id}">
-								<option class="form-control" th:text="New Business Entity" ></option>
-								<option th:each="tp : ${types}" th:value="${id}" class="form-control" th:text="${id}" th:selected="${salesPerson.type=tp}"></option>
+							<select class="form-control-range" th:field="*{salesterritory}">
+								<option th:each="territory : ${territories}" th:value="${territory.territoryid}" 
+								class="form-control" th:text="${territory.territoryid}" th:selected="${sales_person.salesterritory=territory}" ></option>
 							</select>
 						</div>
 						<div class="form-group col-md-6">
@@ -40,13 +38,13 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="commissionpct" class="col-form-label">Commission PCT</label> 
-							<input type="text" th:field="*{commissionpct}" class="form-control" id="commissionpct" placeholder="Ej: 650000"> 
+							<input type="text" th:field="*{commissionpct}" class="form-control" id="commissionpct" placeholder="Ej: 150000"> 
 							<span th:if="${#fields.hasErrors('commissionpct')}" th:errors="*{commissionpct}" class="text-danger"></span>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Update User">
+							<input type="submit" name="action" class="btn btn-primary" value="Update">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">
@@ -60,4 +58,5 @@
 		</div>
 	</div>
 </body>
+
 </html>

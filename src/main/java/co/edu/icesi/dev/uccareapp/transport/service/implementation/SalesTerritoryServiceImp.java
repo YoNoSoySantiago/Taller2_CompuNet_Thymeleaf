@@ -69,6 +69,11 @@ public class SalesTerritoryServiceImp implements SalesTerritoryService {
 			throw new ObjectDoesNotExistException("This region code, does not exist");
 		}
 	}
+	
+	@Override
+	public void delete(Salesterritory salesTerritory) {
+		this.salesTerritoryRespository.delete(salesTerritory);
+	}
 
 	@Override
 	public Optional<Salesterritory> findById(Integer id) {

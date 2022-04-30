@@ -43,7 +43,7 @@ public class SalesPersonServiceImp implements SalesPersonService {
 		) {
 			throw new NullPointerException("Empty values or nulls");
 		}
-		System.out.println(BusinessId);
+		
 		Optional<Salesperson> person = findById(BusinessId);
 		if(person.isEmpty()) {
 			if(salesPerson.getSalesquota().compareTo(BigDecimal.ZERO)<0) {
@@ -103,6 +103,11 @@ public class SalesPersonServiceImp implements SalesPersonService {
 			throw new ObjectDoesNotExistException("this id does not exist");
 		}
 	}
+	
+	@Override
+	public void delete(Salesperson salesperson) {
+		this.salesPersonRepository.delete(salesperson);
+	}
 
 	@Override
 	public Optional<Salesperson> findById(Integer id) {
@@ -119,4 +124,6 @@ public class SalesPersonServiceImp implements SalesPersonService {
 		
 		this.salesPersonRepository.deleteAll();
 	}
+
+	
 }

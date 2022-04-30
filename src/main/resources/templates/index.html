@@ -19,14 +19,14 @@
 	<div th:switch="${apps}" class="container my-5">
 		<div class="row">
 			<div class="col-md-6">
-				<h2 th:case="null">Users and Appointments!</h2>
+				<h2 th:case="null">Sales Persons - Sales Territories¡!</h2>
 				
 				<p><a href="/sales_persons/"><i class="fas fa-user-edit ml-2"></i> Go to Sales Persons</a></p>
 				<p><a href="/sales_territories/"><i class="fas fa-calendar ml-2"></i> Go to Sales Territories</a></p>
-				<!--
-				<p><a href="/sales_persons/"><i class="fas fa-user-edit ml-2"></i> Go to Sales Quota Person Histories</a></p>
-				<p><a href="/sales_territories/"><i class="fas fa-calendar ml-2"></i> Go to Sales Territories</a></p>
-				-->
+				
+				<p><a href="/sales_persons_history/"><i class="fas fa-user-edit ml-2"></i> Go to Sales Quota Person History</a></p>
+				<p><a href="/sales_territories_history/"><i class="fas fa-calendar ml-2"></i> Go to Sales Territories History</a></p>
+			
 			</div>
 		</div>
 	</div>

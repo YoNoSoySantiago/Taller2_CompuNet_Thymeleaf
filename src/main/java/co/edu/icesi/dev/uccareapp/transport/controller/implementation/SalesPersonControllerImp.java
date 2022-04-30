@@ -2,13 +2,17 @@ package co.edu.icesi.dev.uccareapp.transport.controller.implementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.InvalidValueException;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.ObjectAlreadyExistException;
@@ -63,7 +67,6 @@ public class SalesPersonControllerImp {
 			if(sales_person.getBusinessentityid()==-1) {
 				Businessentity be = new Businessentity();
 				businessentityRepository.save(be);
-				
 				Businessentity last = null;
 				for(Businessentity aux : businessentityRepository.findAll()) {
 					if(last==null) {
@@ -72,12 +75,61 @@ public class SalesPersonControllerImp {
 						last = aux;
 					}
 				}
+				
 				sales_person.setBusinessentityid(last.getBusinessentityid());
 			}
 			salesPersonService.add(sales_person,  sales_person.getBusinessentityid(),sales_person.getSalesterritory().getTerritoryid());
+			
 		} catch (InvalidValueException | ObjectAlreadyExistException | ObjectDoesNotExistException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		return "redirect:/sales_persons";
+	}
+	
+	@GetMapping("/sales_persons/edit/{id}")
+	public String editSalesPerson(@PathVariable("id") int id,Model model) {
+		Optional<Salesperson> salesPerson = salesPersonService.findById(id);
+		if(!salesPerson.isEmpty()) {
+			
+			Iterable<Salesterritory> territories = salesTerritoryRepository.findAll();
+			
+			model.addAttribute("territories", territories.iterator());
+			model.addAttribute("sales_person", salesPerson.get());
+			return "sales/person/update-sales-person";
+		}
+		return "redirect:/sales_persons";
+	}
+	
+	@PostMapping("/sales_persons/edit/{id}")
+	public String updateSalesPerson(@PathVariable("id") int id,
+			@RequestParam(value = "action", required = true) String action,@ModelAttribute Salesperson salesperson, BindingResult bindingResult, Model model) {
+		if (action != null && !action.equals("Cancel")) {
+			if(bindingResult.hasErrors()) {
+				Iterable<Salesterritory> territories = salesTerritoryRepository.findAll();
+				
+				model.addAttribute("territories", territories.iterator());
+				model.addAttribute("sales_person", salesperson);
+				return "sales/person/update-sales-person";
+			}
+			try {
+				salesperson.setBusinessentityid(id);
+				salesPersonService.edit(salesperson);
+			} catch (InvalidValueException | ObjectDoesNotExistException e) {
+				e.printStackTrace();
+			}
+			model.addAttribute("sales_persons", salesPersonService.findAll());
+		}
+		return "redirect:/sales_persons";
+	}
+	
+	@GetMapping("/sales_persons/del/{id}")
+	public String deleteSalesPerson(@PathVariable("id") int id, Model model) {
+		Optional<Salesperson> salesPerson = salesPersonService.findById(id);
+		if(!salesPerson.isEmpty()) {
+			
+			salesPersonService.delete(salesPerson.get());
+			model.addAttribute("sales_persons", salesPersonService.findAll());
 		}
 		return "redirect:/sales_persons";
 	}

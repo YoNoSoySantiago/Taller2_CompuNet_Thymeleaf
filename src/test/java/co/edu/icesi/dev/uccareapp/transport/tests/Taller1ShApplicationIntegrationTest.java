@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-import co.edu.icesi.dev.uccareapp.transport.Taller1ShApplication;
+import co.edu.icesi.dev.uccareapp.transport.Taller2ShApplication;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.InvalidValueException;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.ObjectAlreadyExistException;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.ObjectDoesNotExistException;
@@ -35,7 +35,7 @@ import co.edu.icesi.dev.uccareapp.transport.service.interfaces.SalesTerritorySer
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-@ContextConfiguration(classes = Taller1ShApplication.class)
+@ContextConfiguration(classes = Taller2ShApplication.class)
 class Taller1ShApplicationIntegrationTest {
 	
 	
