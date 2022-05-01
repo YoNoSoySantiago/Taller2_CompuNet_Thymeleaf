@@ -45,17 +45,18 @@ public class SalesTerritoryControllerImp {
 	@PostMapping("/sales_territories/add")
 	public String saveSalesTerritory(@Validated @ModelAttribute Salesterritory salesTerritory,
 			BindingResult bindingResult,Model model, @RequestParam(value = "action", required = true) String action) {
-		try {
-			if(bindingResult.hasErrors()) {
-				model.addAttribute("salesterritory", salesTerritory);
-				model.addAttribute("countries_region", countryRegionRepository.findAll());
-				System.out.println(bindingResult.getFieldError().getObjectName()+" ERROR");
-				return "sales/territory/add-sales-territory";
+		if (!action.equals("Cancel")) {
+			try {
+				if(bindingResult.hasErrors()) {
+					model.addAttribute("salesterritory", salesTerritory);
+					model.addAttribute("countries_region", countryRegionRepository.findAll());
+					System.out.println(bindingResult.getFieldError().getObjectName()+" ERROR");
+					return "sales/territory/add-sales-territory";
+				}
+				salesTerritoryService.add(salesTerritory);
+			} catch (InvalidValueException | ObjectDoesNotExistException e) {
+				e.printStackTrace();
 			}
-			salesTerritoryService.add(salesTerritory);
-		} catch (InvalidValueException | ObjectDoesNotExistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return "redirect:/sales_territories";
 	}

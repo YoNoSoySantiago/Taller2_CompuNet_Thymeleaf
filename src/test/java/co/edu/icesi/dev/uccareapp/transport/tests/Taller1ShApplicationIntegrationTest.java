@@ -349,8 +349,8 @@ class Taller1ShApplicationIntegrationTest {
 		Salesterritoryhistory salesterritoryhistory = setUpSalesTerritoryHistory();
 		salesterritoryhistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
 		salesterritoryhistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
-		salesterritoryhistory.setSalesperson(salesPersonService.findById(1).get());
-		salesterritoryhistory.setSalesterritory(salesTerritoryService.findById(1).get());
+		salesterritoryhistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1).get());
+		salesterritoryhistory.setSalesTerritory(salesTerritoryService.findById(1).get());
 		salesTerritoryHistoryService.edit(salesterritoryhistory);
 		
 		Salesterritoryhistory salesTerritoryHistoryEdited =  salesTerritoryHistoryService.findById(1).get();

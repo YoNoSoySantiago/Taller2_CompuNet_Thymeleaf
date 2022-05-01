@@ -60,7 +60,7 @@ public class Salesterritory implements Serializable {
 	private List<Salesperson> salespersons;
 
 	// bi-directional many-to-one association to Salesterritoryhistory
-	@OneToMany(mappedBy = "salesterritory")
+	@OneToMany(mappedBy = "salesTerritory")
 	private List<Salesterritoryhistory> salesterritoryhistories;
 
 	public Salesterritory() {
@@ -89,7 +89,7 @@ public class Salesterritory implements Serializable {
 
 	public Salesterritoryhistory addSalesterritoryhistory(Salesterritoryhistory salesterritoryhistory) {
 		getSalesterritoryhistories().add(salesterritoryhistory);
-		salesterritoryhistory.setSalesterritory(this);
+		salesterritoryhistory.setSalesTerritory(this);
 
 		return salesterritoryhistory;
 	}
@@ -173,7 +173,7 @@ public class Salesterritory implements Serializable {
 
 	public Salesterritoryhistory removeSalesterritoryhistory(Salesterritoryhistory salesterritoryhistory) {
 		getSalesterritoryhistories().remove(salesterritoryhistory);
-		salesterritoryhistory.setSalesterritory(null);
+		salesterritoryhistory.setSalesTerritory(null);
 
 		return salesterritoryhistory;
 	}

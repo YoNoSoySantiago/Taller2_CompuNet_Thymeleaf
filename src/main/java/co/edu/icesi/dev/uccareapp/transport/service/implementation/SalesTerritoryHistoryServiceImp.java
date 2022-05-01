@@ -34,49 +34,41 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 	@Override
 	public void add(Salesterritoryhistory salesTerritoryHistory,Integer businessId, Integer territoryId) throws InvalidValueException, ObjectDoesNotExistException, ObjectAlreadyExistException {
 		if(
-			salesTerritoryHistory.getId()==null||
 			salesTerritoryHistory.getEnddate()==null||
-			salesTerritoryHistory.getModifieddate()==null||
+			salesTerritoryHistory.getStartdate()==null||
 			businessId == null||
 			territoryId==null){
 			
 				throw new NullPointerException("Values empties or null");
 		}
 		
-		Optional<Salesterritoryhistory> opTerriHistory =  this.salesTerritoryHistoryRepository.findById(salesTerritoryHistory.getId());
 		Optional<Salesterritory> opTerritory = this.salesTerritoryRepository.findById(territoryId);
 		Optional<Salesperson> opSalesPerson = this.salesPersonRepository.findById(businessId);
 		
-		
-		if(opTerriHistory.isEmpty()) {
-			if(salesTerritoryHistory.getEnddate().compareTo(Timestamp.valueOf(LocalDateTime.now()))>0) {
-				throw new InvalidValueException("The end date have to be lower than the current date");
-			}
-			if(salesTerritoryHistory.getModifieddate().compareTo(salesTerritoryHistory.getEnddate())>=0) {
-				throw new InvalidValueException("The moddified data no should be equals or higgier to the end data");
-			}
-			if(opSalesPerson.isEmpty()) {
-				throw new ObjectDoesNotExistException("this sales person does not exist");
-			}
-			if(opTerritory.isEmpty()) {
-				throw new ObjectDoesNotExistException("The territory does not exist");
-			}
-			salesTerritoryHistory.setSalesperson(opSalesPerson.get());
-			salesTerritoryHistory.setSalesterritory(opTerritory.get());
-			this.salesTerritoryHistoryRepository.save(salesTerritoryHistory);
-		}else {
-			throw new ObjectAlreadyExistException("This ID already Exist");
+		if(salesTerritoryHistory.getEnddate().compareTo(Timestamp.valueOf(LocalDateTime.now()))>0) {
+			throw new InvalidValueException("The end date have to be lower than the current date");
 		}
-		
+		if(salesTerritoryHistory.getStartdate().compareTo(salesTerritoryHistory.getEnddate())>=0) {
+			throw new InvalidValueException("The moddified data no should be equals or higgier to the end data");
+		}
+		if(opSalesPerson.isEmpty()) {
+			throw new ObjectDoesNotExistException("this sales person does not exist");
+		}
+		if(opTerritory.isEmpty()) {
+			throw new ObjectDoesNotExistException("The territory does not exist");
+		}
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(opSalesPerson.get());
+		salesTerritoryHistory.setSalesTerritory(opTerritory.get());
+		this.salesTerritoryHistoryRepository.save(salesTerritoryHistory);
 	}
 
 	@Override
 	public void edit(Salesterritoryhistory salesTerritoryHistory) throws InvalidValueException, ObjectDoesNotExistException {
-		if(		salesTerritoryHistory.getSalesperson()==null||
-				salesTerritoryHistory.getSalesterritory()==null||
+		if(		salesTerritoryHistory.getSalesPersonTerritoryHistory()==null||
+				salesTerritoryHistory.getSalesTerritory()==null||
 				salesTerritoryHistory.getId()==null||
 				salesTerritoryHistory.getEnddate()==null||
-				salesTerritoryHistory.getModifieddate()==null){
+				salesTerritoryHistory.getStartdate()==null){
 				
 					throw new NullPointerException("Values empties or null");
 		}
@@ -87,12 +79,13 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 				throw new InvalidValueException("The end date have to be lower than the current date");
 			}
 			
-			if(salesTerritoryHistory.getModifieddate().compareTo(salesTerritoryHistory.getEnddate())>=0) {
+			if(salesTerritoryHistory.getStartdate().compareTo(salesTerritoryHistory.getEnddate())>=0) {
+				
 				throw new InvalidValueException("The moddified data no should be equals or higgier to the end data");
 			}
 			Salesterritoryhistory oldTerritoryHistory = opTerritoryHistory.get();
 			oldTerritoryHistory.setEnddate(salesTerritoryHistory.getEnddate());
-			oldTerritoryHistory.setModifieddate(salesTerritoryHistory.getModifieddate());
+			oldTerritoryHistory.setStartdate(salesTerritoryHistory.getStartdate());
 			this.salesTerritoryHistoryRepository.save(oldTerritoryHistory);
 		}else {
 			throw new ObjectDoesNotExistException("This id does not exist");
@@ -107,14 +100,17 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 
 	@Override
 	public Iterable<Salesterritoryhistory> findAll() {
-		
 		return this.salesTerritoryHistoryRepository.findAll();
 	}
 
 	@Override
 	public void clear() {
-		
 		this.salesTerritoryHistoryRepository.deleteAll();
+	}
+
+	@Override
+	public void delete(Salesterritoryhistory salesterritoryhistory) {
+		this.salesTerritoryHistoryRepository.delete(salesterritoryhistory);
 	}
 
 

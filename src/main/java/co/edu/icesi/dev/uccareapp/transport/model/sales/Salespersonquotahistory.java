@@ -36,17 +36,21 @@ public class Salespersonquotahistory implements Serializable {
 
 	private BigDecimal salesquota;
 
+	public Salesperson getSalesperson() {
+		return salesperson;
+	}
+
+	public void setSalesperson(Salesperson salesperson) {
+		this.salesperson = salesperson;
+	}
+
 	// bi-directional many-to-one association to Salesperson
 	@ManyToOne
-	@JoinColumn(name = "businessentityid", insertable = false, updatable = false)
+	@JoinColumn(name = "businessentityid")
 	private Salesperson salesperson;
 
 	public Salespersonquotahistory() {
 	}
-
-//	public SalespersonquotahistoryPK getId() {
-//		return this.id;
-//	}
 	
 	public Integer getId() {
 		return this.id;
@@ -56,21 +60,15 @@ public class Salespersonquotahistory implements Serializable {
 		return this.modifieddate;
 	}
 
+
 	public Integer getRowguid() {
 		return this.rowguid;
-	}
-
-	public Salesperson getSalesperson() {
-		return this.salesperson;
 	}
 
 	public BigDecimal getSalesquota() {
 		return this.salesquota;
 	}
-
-//	public void setId(SalespersonquotahistoryPK id) {
-//		this.id = id;
-//	}
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -81,10 +79,6 @@ public class Salespersonquotahistory implements Serializable {
 
 	public void setRowguid(Integer rowguid) {
 		this.rowguid = rowguid;
-	}
-
-	public void setSalesperson(Salesperson salesperson) {
-		this.salesperson = salesperson;
 	}
 
 	public void setSalesquota(BigDecimal salesquota) {

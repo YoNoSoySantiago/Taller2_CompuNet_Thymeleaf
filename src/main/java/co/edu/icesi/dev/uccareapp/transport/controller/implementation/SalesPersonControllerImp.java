@@ -62,27 +62,41 @@ public class SalesPersonControllerImp {
 	}
 	
 	@PostMapping("/sales_persons/add")
-	public String saveSalesPerson(Model model,  Salesperson sales_person) {
-		try {
-			if(sales_person.getBusinessentityid()==-1) {
-				Businessentity be = new Businessentity();
-				businessentityRepository.save(be);
-				Businessentity last = null;
-				for(Businessentity aux : businessentityRepository.findAll()) {
-					if(last==null) {
-						last = aux;
-					}else if(aux.getBusinessentityid()>last.getBusinessentityid()) {
-						last = aux;
+	public String saveSalesPerson(@RequestParam(value = "action", required = true) String action,BindingResult bindingResult,Model model,  Salesperson sales_person) {
+		if (action != null && !action.equals("Cancel")) {
+			try {
+				if(sales_person.getBusinessentityid()==-1) {
+					Businessentity be = new Businessentity();
+					businessentityRepository.save(be);
+					Businessentity last = null;
+					for(Businessentity aux : businessentityRepository.findAll()) {
+						if(last==null) {
+							last = aux;
+						}else if(aux.getBusinessentityid()>last.getBusinessentityid()) {
+							last = aux;
+						}
 					}
+					
+					sales_person.setBusinessentityid(last.getBusinessentityid());
 				}
+				if(bindingResult.hasErrors()) {
+					Iterable<Businessentity> entities =	businessentityRepository.findAll();
+					List<Integer> bussinessentities_ids =  new ArrayList<Integer>();
+					for(Businessentity entity : entities) {
+						bussinessentities_ids.add(entity.getBusinessentityid());
+					}
+					Iterable<Salesterritory> territories = salesTerritoryRepository.findAll();
+					model.addAttribute("businessentities_ids", bussinessentities_ids.iterator());
+					model.addAttribute("territories", territories.iterator());
+					model.addAttribute("sales_person", sales_person);
+					return "sales/territory/add-sales-territory";
+				}
+				salesPersonService.add(sales_person,  sales_person.getBusinessentityid(),sales_person.getSalesterritory().getTerritoryid());
 				
-				sales_person.setBusinessentityid(last.getBusinessentityid());
+			} catch (InvalidValueException | ObjectAlreadyExistException | ObjectDoesNotExistException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			salesPersonService.add(sales_person,  sales_person.getBusinessentityid(),sales_person.getSalesterritory().getTerritoryid());
-			
-		} catch (InvalidValueException | ObjectAlreadyExistException | ObjectDoesNotExistException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		return "redirect:/sales_persons";
 	}

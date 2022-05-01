@@ -28,28 +28,25 @@
 								<th>Id</th>
 								<th>Sales Person</th>
 								<th>Sales Quota</th>
+								<th>Modified Date</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="person_history : ${persons_history}">
 								<td class="text-info" th:text="${person_history.id}"></td>
-								<td class="text-info" th:text="${person_history.username}"></td>
-								<td class="text-info" th:text="${person_history.password}"></td>
-								<td class="text-info" th:text="${person_history.name}"></td>
-								<td class="text-info" th:text="${person_history.email}"></td>
-								<td class="text-info" th:text="${person_history.type}"></td>
-								<td class="text-info" th:text="${person_history.gender}"></td>
-								<td class="text-info" th:text="${person_history.birthDate}"></td>
-								<td><a th:href="@{/persons_history/edit/{id}(id=${person_history.id})}"
+								<td class="text-info" th:text="${person_history.salesperson.businessentityid}"></td>
+								<td class="text-info" th:text="${person_history.salesquota}"></td>
+								<td class="text-info" th:text="${person_history.modifieddate}"></td>
+								<td><a th:href="@{/sales_persons_history/edit/{id}(id=${person_history.id})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a th:href="@{/persons_history/del/{id}(id=${person_history.id})}"
+								<td><a th:href="@{/sales_persons_history/del/{id}(id=${person_history.id})}"
 									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<p class="my-5">
-					<a href="/persons_history/add" class="btn btn-primary"><i
+					<a href="/sales_persons_history/add" class="btn btn-primary"><i
 						class="fas fa-user-plus ml-2"></i></a>
 				</p>
 			</div>

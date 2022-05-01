@@ -28,6 +28,7 @@
 									<th>Id</th>
 									<th>Business Entity</th>
 									<th>Sales Territory</th>
+									<th>Start Date</th>
 									<th>End Date</th>
 									<th>Modified Date</th>
 								</tr>
@@ -35,20 +36,21 @@
 							<tbody>
 								<tr th:each="territory_history : ${territories_history}">
 									<td class="text-info" th:text="${territory_history.id}"></td>
-									<td class="text-info" th:text="${territory_history.salesperson.businessentityid}"></td>
-									<td class="text-info" th:text="${territory_history.salesterritory.territoryid}"></td>
+									<td class="text-info" th:text="${territory_history.salesPersonTerritoryHistory.businessentityid}"></td>
+									<td class="text-info" th:text="${territory_history.salesTerritory.territoryid}"></td>
+									<td class="text-info" th:text="${territory_history.startdate}"></td>
 									<td class="text-info" th:text="${territory_history.enddate}"></td>
 									<td class="text-info" th:text="${territory_history.modifieddate}"></td>
-									<td><a th:href="@{/territories_history/edit/{id}(id=${territory_history.id})}"
+									<td><a th:href="@{/sales_territories_history/edit/{id}(id=${territory_history.id})}"
 										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-									<td><a th:href="@{/territories_history/del/{id}(id=${territory_history.id})}"
+									<td><a th:href="@{/sales_territories_history/del/{id}(id=${territory_history.id})}"
 										class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				<p class="my-5">
-					<a href="/territories_history/add" class="btn btn-primary"><i
+					<a href="/sales_territories_history/add" class="btn btn-primary"><i
 						class="fas fa-user-plus ml-2"></i></a>
 				</p>
 			</div>

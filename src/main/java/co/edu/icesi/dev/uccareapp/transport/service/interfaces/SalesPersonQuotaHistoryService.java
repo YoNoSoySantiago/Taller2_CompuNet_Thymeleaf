@@ -17,4 +17,5 @@ public interface SalesPersonQuotaHistoryService {
 	public Iterable<Salespersonquotahistory> findAll();
 	
 	public void clear();
+	public void delete(Salespersonquotahistory salespersonquotahistory);
 }

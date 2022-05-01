@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
  * The persistent class for the salesterritoryhistory database table.
  *
@@ -28,22 +30,24 @@ public class Salesterritoryhistory implements Serializable {
 	@SequenceGenerator(name = "SALESTERRITORYHISTORY_ID_GENERATOR", allocationSize = 1, sequenceName = "SALESTERRITORYHISTORY_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SALESTERRITORYHISTORY_ID_GENERATOR")
 	private Integer id;
-	
+
 	private Timestamp enddate;
 
 	private Timestamp modifieddate;
+	
+	private Timestamp startdate;
 
 	private Integer rowguid;
 
 	// bi-directional many-to-one association to Salesperson
 	@ManyToOne
-	@JoinColumn(name = "businessentityid", insertable = false, updatable = false)
-	private Salesperson salesperson;
+	@JoinColumn(name = "businessentityid")
+	private Salesperson salesPersonTerritoryHistory;
 
-	// bi-directional many-to-one association to Salesterritory
+	// bi-directional many-to-one association to salesTerritory
 	@ManyToOne
-	@JoinColumn(name = "territoryid", insertable = false, updatable = false)
-	private Salesterritory salesterritory;
+	@JoinColumn(name = "territoryid")
+	private Salesterritory salesTerritory;
 
 	public Salesterritoryhistory() {
 	}
@@ -68,12 +72,9 @@ public class Salesterritoryhistory implements Serializable {
 		return this.rowguid;
 	}
 
-	public Salesperson getSalesperson() {
-		return this.salesperson;
-	}
 
-	public Salesterritory getSalesterritory() {
-		return this.salesterritory;
+	public Salesterritory getSalesTerritory() {
+		return this.salesTerritory;
 	}
 
 	public void setEnddate(Timestamp enddate) {
@@ -96,12 +97,24 @@ public class Salesterritoryhistory implements Serializable {
 		this.rowguid = rowguid;
 	}
 
-	public void setSalesperson(Salesperson salesperson) {
-		this.salesperson = salesperson;
+	public Salesperson getSalesPersonTerritoryHistory() {
+		return salesPersonTerritoryHistory;
 	}
 
-	public void setSalesterritory(Salesterritory salesterritory) {
-		this.salesterritory = salesterritory;
+	public void setSalesPersonTerritoryHistory(Salesperson salesPersonTerritoryHistory) {
+		this.salesPersonTerritoryHistory = salesPersonTerritoryHistory;
+	}
+
+	public void setSalesTerritory(Salesterritory salesTerritory) {
+		this.salesTerritory = salesTerritory;
+	}
+
+	public Timestamp getStartdate() {
+		return startdate;
+	}
+
+	public void setStartdate(Timestamp startdate) {
+		this.startdate = startdate;
 	}
 
 }

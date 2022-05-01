@@ -574,7 +574,7 @@ class Taller1ShApplicationUnitTests {
 		when(salesPersonRepository.findById(1234)).thenReturn(opPerson);
 		Salesterritoryhistory salesTerritoryHistory = new Salesterritoryhistory();
 		salesTerritoryHistory.setId(1234);
-		salesTerritoryHistory.setSalesterritory(salesTerritory);
+		salesTerritoryHistory.setSalesTerritory(salesTerritory);
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		
@@ -640,7 +640,7 @@ class Taller1ShApplicationUnitTests {
 	void saveSalesTerritoryHistoryTerritoryNullTest() {
 		setUpEmptyIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
-		salesTerritoryHistory.setSalesterritory(null);
+		salesTerritoryHistory.setSalesTerritory(null);
 		assertThrows(NullPointerException.class,()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,1234,null);
 		});
@@ -650,7 +650,7 @@ class Taller1ShApplicationUnitTests {
 	void saveSalesTerritoryHistoryBusinessIdNullTest() {
 		setUpEmptyIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
-		salesTerritoryHistory.setSalesterritory(null);
+		salesTerritoryHistory.setSalesTerritory(null);
 		assertThrows(NullPointerException.class,()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,null,4321);
 		});
@@ -682,8 +682,8 @@ class Taller1ShApplicationUnitTests {
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
-		salesTerritoryHistory.setSalesperson(salesPersonService.findById(1234).get());
-		salesTerritoryHistory.setSalesterritory(salesTerritoryService.findById(4321).get());
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
+		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
 		});
@@ -694,8 +694,8 @@ class Taller1ShApplicationUnitTests {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().plusDays(1)));
-		salesTerritoryHistory.setSalesperson(salesPersonService.findById(1234).get());
-		salesTerritoryHistory.setSalesterritory(salesTerritoryService.findById(4321).get());
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
+		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
 		});
@@ -707,8 +707,8 @@ class Taller1ShApplicationUnitTests {
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now()));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now()));
-		salesTerritoryHistory.setSalesperson(salesPersonService.findById(1234).get());
-		salesTerritoryHistory.setSalesterritory(salesTerritoryService.findById(4321).get());
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
+		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
 		});
@@ -719,8 +719,8 @@ class Taller1ShApplicationUnitTests {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
-		salesTerritoryHistory.setSalesperson(salesPersonService.findById(1234).get());
-		salesTerritoryHistory.setSalesterritory(salesTerritoryService.findById(4321).get());
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
+		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertDoesNotThrow(()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
 		});
@@ -731,8 +731,8 @@ class Taller1ShApplicationUnitTests {
 	void editSalesTerritoryHistoryIdNullTest() {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
-		salesTerritoryHistory.setSalesperson(salesPersonService.findById(1234).get());
-		salesTerritoryHistory.setSalesterritory(salesTerritoryService.findById(4321).get());
+		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
+		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		salesTerritoryHistory.setId(null);
 		assertThrows(NullPointerException.class,()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
@@ -743,7 +743,7 @@ class Taller1ShApplicationUnitTests {
 	void editSalesTerritoryHistoryTerritoryNullTest() {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
-		salesTerritoryHistory.setSalesterritory(null);
+		salesTerritoryHistory.setSalesTerritory(null);
 		assertThrows(NullPointerException.class,()->{
 			salesTerritoryHistoryService.edit(salesTerritoryHistory);
 		});

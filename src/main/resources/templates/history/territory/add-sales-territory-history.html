@@ -15,28 +15,41 @@
 
 <body>
 	<div class="container my-5">
-		<h2 class="mb-5">Add Sales Person</h2>
+		<h2 class="mb-5">New Sales Territory History</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/users/add/}" th:object="${user}" method="post">
+				<form action="#" th:action="@{/sales_territories_history/add/}" th:object="${salesterritoryhistory}"
+					method="post">
 					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="type" class="col-form-label">Business Entity</label> 
-							<select class="form-control-range" th:field="*{id}">
-								<option class="form-control" th:text="New Business Entity" ></option>
-								<option th:each="tp : ${types}" th:value="${id}" class="form-control" th:text="${id}" th:selected="${salesPerson.type=tp}"></option>
-							</select>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="type" class="col-form-label">Sales Territory</label> 
-							<select class="form-control-range" th:field="*{id}">
-								<option th:each="tp : ${types}" th:value="${id}" class="form-control" th:text="${id}" th:selected="${salesPerson.type=tp}"></option>
-							</select>
-						</div>
-						<div class="form-group col-md-6">
-							<label for="enddate" class="col-form-label">End Date</label>
-							<input type="date" th:field="*{enddate}" class="form-control" id="enddate" placeholder="30/03/3033"> 
-                            <span th:if="${#fields.hasErrors('enddate')}" th:errors="*{enddate}" class="text-danger"></span>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="salesPersonTerritoryHistory" class="col-form-label">Sales Person ID</label>
+								<select id="salesPersonTerritoryHistory" class="form-control-range" th:field="*{salesPersonTerritoryHistory}">
+									<option th:each="sales_person : ${sales_persons}" 
+										th:value="${sales_person.businessentityid}" class="form-control" 
+										th:text="${sales_person.businessentityid}"
+										th:selected="${salesterritoryhistory.salesPersonTerritoryHistory=sales_person}">
+									</option>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="salesTerritory" class="col-form-label">Sales Territory ID</label>
+								<select id="salesTerritory" class="form-control-range" th:field="*{salesTerritory}">
+									<option th:each="sales_territory : ${sales_territories}"
+										th:value="${sales_territory.territoryid}" class="form-control"
+										th:text="${sales_territory.territoryid}"
+										th:selected="${salesterritoryhistory.salesTerritory=sales_territory}">
+									</option>
+								</select>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="StartDate" class="col-form-label">Start Date</label>
+								<input type="datetime-local" name="StartDate" class="form-control" id="StartDate">
+							</div>
+							<div class="form-group col-md-6">
+								<label for="EndDate" class="col-form-label">End Date</label>
+								<input type="datetime-local" name="EndDate" class="form-control" id="EndDate">
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -55,5 +68,7 @@
 		</div>
 	</div>
 </body>
+
+</html>
 
 </html>

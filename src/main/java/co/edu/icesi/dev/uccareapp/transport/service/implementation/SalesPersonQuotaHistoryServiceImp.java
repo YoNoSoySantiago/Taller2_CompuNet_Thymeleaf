@@ -32,30 +32,24 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 	@Override
 	public void add(Salespersonquotahistory salesPersonQuotaHistory, Integer idSalesPerson) throws InvalidValueException, ObjectAlreadyExistException, ObjectDoesNotExistException {
 		if(
-			salesPersonQuotaHistory.getId()==null||
 			salesPersonQuotaHistory.getModifieddate()==null||
 			salesPersonQuotaHistory.getSalesquota() == null) {
 				
 				throw new NullPointerException("Values empties or null");
 		}
-		Optional<Salespersonquotahistory> quotaHistory = findById(salesPersonQuotaHistory.getId());
-		if(quotaHistory.isEmpty()) {
-			if(salesPersonQuotaHistory.getModifieddate().compareTo(Timestamp.valueOf(LocalDateTime.now()))>0) {
-				throw new InvalidValueException("The quota date must to be lower than the current date");
-			}
-			if(salesPersonQuotaHistory.getSalesquota().compareTo(BigDecimal.ZERO)<0) {
-				throw new InvalidValueException("The sales quota must to be a positive number");
-			}
-			
-			Optional<Salesperson> OpSalesPerson = salesPersonRepository.findById(idSalesPerson);
-			if(OpSalesPerson.isEmpty()) {
-				throw new ObjectDoesNotExistException("This id of businessentity does not exist");
-			}
-			salesPersonQuotaHistory.setSalesperson(OpSalesPerson.get());
-			this.salesPersonQuotaHistoryRepository.save(salesPersonQuotaHistory);
-		}else {
-			throw new ObjectAlreadyExistException("This id already exist");
+		if(salesPersonQuotaHistory.getModifieddate().compareTo(Timestamp.valueOf(LocalDateTime.now()))>0) {
+			throw new InvalidValueException("The quota date must to be lower than the current date");
 		}
+		if(salesPersonQuotaHistory.getSalesquota().compareTo(BigDecimal.ZERO)<0) {
+			throw new InvalidValueException("The sales quota must to be a positive number");
+		}
+		
+		Optional<Salesperson> OpSalesPerson = salesPersonRepository.findById(idSalesPerson);
+		if(OpSalesPerson.isEmpty()) {
+			throw new ObjectDoesNotExistException("This id of businessentity does not exist");
+		}
+		salesPersonQuotaHistory.setSalesperson(OpSalesPerson.get());
+		this.salesPersonQuotaHistoryRepository.save(salesPersonQuotaHistory);
 	}
 
 	@Override
@@ -87,20 +81,22 @@ public class SalesPersonQuotaHistoryServiceImp implements SalesPersonQuotaHistor
 
 	@Override
 	public Optional<Salespersonquotahistory> findById(Integer id) {
-
 		return this.salesPersonQuotaHistoryRepository.findById(id);
 	}
 
 	@Override
 	public Iterable<Salespersonquotahistory> findAll() {
-		
 		return this.salesPersonQuotaHistoryRepository.findAll();
 	}
 
 	@Override
 	public void clear() {
-		
 		this.salesPersonQuotaHistoryRepository.deleteAll();
+	}
+
+	@Override
+	public void delete(Salespersonquotahistory salespersonquotahistory) {
+		this.salesPersonQuotaHistoryRepository.delete(salespersonquotahistory);
 	}
 
 }

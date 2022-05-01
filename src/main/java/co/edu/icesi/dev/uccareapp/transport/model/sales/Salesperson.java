@@ -6,14 +6,11 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
 
 /**
  * The persistent class for the salesperson database table.
@@ -55,7 +52,7 @@ public class Salesperson implements Serializable {
 	private List<Salespersonquotahistory> salespersonquotahistories;
 
 	// bi-directional many-to-one association to Salesterritoryhistory
-	@OneToMany(mappedBy = "salesperson")
+	@OneToMany(mappedBy = "salesPersonTerritoryHistory")
 	private List<Salesterritoryhistory> salesterritoryhistories;
 
 	// bi-directional many-to-one association to Store
@@ -81,7 +78,7 @@ public class Salesperson implements Serializable {
 
 	public Salesterritoryhistory addSalesterritoryhistory(Salesterritoryhistory salesterritoryhistory) {
 		getSalesterritoryhistories().add(salesterritoryhistory);
-		salesterritoryhistory.setSalesperson(this);
+		salesterritoryhistory.setSalesPersonTerritoryHistory(this);
 
 		return salesterritoryhistory;
 	}
@@ -161,7 +158,7 @@ public class Salesperson implements Serializable {
 
 	public Salesterritoryhistory removeSalesterritoryhistory(Salesterritoryhistory salesterritoryhistory) {
 		getSalesterritoryhistories().remove(salesterritoryhistory);
-		salesterritoryhistory.setSalesperson(null);
+		salesterritoryhistory.setSalesPersonTerritoryHistory(null);
 
 		return salesterritoryhistory;
 	}

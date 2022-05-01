@@ -2,8 +2,6 @@ package co.edu.icesi.dev.uccareapp.transport.service.interfaces;
 
 import java.util.Optional;
 
-import org.springframework.stereotype.Service;
-
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.InvalidValueException;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.ObjectAlreadyExistException;
 import co.edu.icesi.dev.uccareapp.transport.customexeptions.ObjectDoesNotExistException;
@@ -18,4 +16,5 @@ public interface SalesTerritoryHistoryService {
 	public Iterable<Salesterritoryhistory> findAll();
 	
 	public void clear();
+	public void delete(Salesterritoryhistory salesterritoryhistory);
 }
