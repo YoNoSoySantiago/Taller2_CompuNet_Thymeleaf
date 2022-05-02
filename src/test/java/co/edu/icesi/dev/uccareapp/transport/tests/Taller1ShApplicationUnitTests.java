@@ -356,15 +356,6 @@ class Taller1ShApplicationUnitTests {
 		});
 	}
 	
-	@Test
-	void saveSalesQuotaHistoryIdNullTest() {
-		setUpEmptyIdValues();
-		Salespersonquotahistory salesQuota = setUpSalesQuotaHistory();
-		salesQuota.setId(null);
-		assertThrows(NullPointerException.class, ()->{
-			salesPersonQuotaHistoryService.add(salesQuota,1234);
-		});
-	}
 	
 	@Test
 	void saveSalesQuotaHistoryModifiedDateNullTest() {
@@ -587,7 +578,7 @@ class Taller1ShApplicationUnitTests {
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
-		
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,1234,4321);
 		});
@@ -598,7 +589,7 @@ class Taller1ShApplicationUnitTests {
 		setUpEmptyIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().plusDays(1)));
-		
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,1234,4321);
 		});
@@ -610,6 +601,7 @@ class Taller1ShApplicationUnitTests {
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now()));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now()));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now()));
 		assertThrows(InvalidValueException.class,()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,1234,4321);
 		});
@@ -620,6 +612,7 @@ class Taller1ShApplicationUnitTests {
 		setUpEmptyIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		assertDoesNotThrow(()->{
 			salesTerritoryHistoryService.add(salesTerritoryHistory,1234,4321);
 		});
@@ -682,6 +675,7 @@ class Taller1ShApplicationUnitTests {
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().minusDays(1)));
 		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
 		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
@@ -694,6 +688,7 @@ class Taller1ShApplicationUnitTests {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now().plusDays(1)));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().plusDays(1)));
 		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
 		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
@@ -706,7 +701,7 @@ class Taller1ShApplicationUnitTests {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setEnddate(Timestamp.valueOf(LocalDateTime.now()));
-		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now()));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now()));
 		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
 		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertThrows(InvalidValueException.class,()->{
@@ -719,6 +714,7 @@ class Taller1ShApplicationUnitTests {
 		setUpIdValues();
 		Salesterritoryhistory salesTerritoryHistory = setUpSalesTerritoryHistory();
 		salesTerritoryHistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
+		salesTerritoryHistory.setStartdate(Timestamp.valueOf(LocalDateTime.now().minusDays(2)));
 		salesTerritoryHistory.setSalesPersonTerritoryHistory(salesPersonService.findById(1234).get());
 		salesTerritoryHistory.setSalesTerritory(salesTerritoryService.findById(4321).get());
 		assertDoesNotThrow(()->{
