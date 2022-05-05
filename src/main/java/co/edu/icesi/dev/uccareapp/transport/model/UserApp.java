@@ -1,4 +1,4 @@
-package co.edu.icesi.dev.uccareapp.transport.model.sales;
+package co.edu.icesi.dev.uccareapp.transport.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

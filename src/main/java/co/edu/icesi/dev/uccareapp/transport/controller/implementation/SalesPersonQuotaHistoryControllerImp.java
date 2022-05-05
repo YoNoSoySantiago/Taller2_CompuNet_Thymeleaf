@@ -55,7 +55,7 @@ public class SalesPersonQuotaHistoryControllerImp {
 					if(bindingResult.hasErrors()) {
 						model.addAttribute("salespersonquotahistory", salespersonquotahistory);
 						model.addAttribute("sales_persons", salesPersonRepository.findAll());
-						return "history/territory/add-sales-person-quota-history";
+						return "history/person/add-sales-person-quota-history";
 					}
 					
 					salespersonquotahistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now()));
@@ -79,17 +79,17 @@ public class SalesPersonQuotaHistoryControllerImp {
 	}
 	
 	@PostMapping("/sales_persons_history/edit/{id}")
-	public String updateSalesPersonHistory(@PathVariable("id") int id,@ModelAttribute Salespersonquotahistory salespersonhistory, 
+	public String updateSalesPersonHistory(@PathVariable("id") int id,@Validated @ModelAttribute Salespersonquotahistory salespersonhistory, 
 			BindingResult bindingResult, Model model, @RequestParam(value = "action", required = true) String action) {
 		
 		if (action != null && !action.equals("Cancel")) {
+			salespersonhistory.setId(id);
 			if(bindingResult.hasErrors()) {
 				model.addAttribute("salespersonquotahistory", salespersonhistory);
 				model.addAttribute("sales_persons", salesPersonRepository.findAll());
 				return "history/person/update-sales-person-quota-history";
 			}
 			try {
-				salespersonhistory.setId(id);
 				salespersonhistory.setModifieddate(Timestamp.valueOf(LocalDateTime.now()));
 				salesPersonQuotaHistoryService.edit(salespersonhistory);
 			} catch (InvalidValueException | ObjectDoesNotExistException e) {
@@ -108,5 +108,12 @@ public class SalesPersonQuotaHistoryControllerImp {
 			model.addAttribute("persons_history", salesPersonQuotaHistoryService.findAll());
 		}
 		return "redirect:/sales_persons_history";
+	}
+	
+	@GetMapping("/sales_persons_history/sales_person_info/{id}")
+	public String showSalesPersonInfo(@PathVariable("id") int id, Model model) {
+		model.addAttribute("back", "/sales_persons_history");
+		model.addAttribute("salesperson", salesPersonRepository.findById(id).get());
+		return "sales/person/info-sales-person";
 	}
 }

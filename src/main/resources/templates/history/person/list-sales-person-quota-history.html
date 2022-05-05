@@ -34,29 +34,22 @@
 						<tbody>
 							<tr th:each="person_history : ${persons_history}">
 								<td class="text-info" th:text="${person_history.id}"></td>
-								
-								<td class="text-info" >
-									<a th:text="${person_history.salesperson.businessentityid}" 
-									th:href="@{/sales_persons_history/sales_person_info/{id}(id=${person_history.salesperson.businessentityid})}"></a>
-									</a>
-								</td>
+								<td class="text-info" th:text="${person_history.salesperson.businessentityid}"></td>
 								<td class="text-info" th:text="${person_history.salesquota}"></td>
 								<td class="text-info" th:text="${person_history.modifieddate}"></td>
-								<td><a th:href="@{/sales_persons_history/edit/{id}(id=${person_history.id})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td><a th:href="@{/sales_persons_history/del/{id}(id=${person_history.id})}"
-									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<p class="my-5">
-					<a href="/sales_persons_history/add" class="btn btn-primary"><i
-						class="fas fa-user-plus ml-2"></i></a>
-				</p>
+				<div class="row">
+                    <div class="col-md-3 mt-3">
+                        <button class="btn btn-secondary" >
+                            <a th:href="${back}">Back</a>
+                        </button>
+                    </div>
+                </div>
 			</div>
 		</div>
-		<a href="/"><i class="fas fa-home ml-2"></i> Go back to main</a>
 	</div>
 </body>
 </html>

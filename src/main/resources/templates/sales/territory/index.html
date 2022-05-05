@@ -23,6 +23,8 @@
 						<table class="table table-striped table-responsive-md">
 							<thead>
 								<tr>
+									<th>Go to Sales Persons</th>
+									<th>Go to Territory History</th>
 									<th>Id</th>
 									<th>Name</th>
 									<th>Country Code</th>
@@ -30,6 +32,11 @@
 							</thead>
 							<tbody>
 								<tr th:each="territory : ${territories}">
+									<td><a th:href="@{/sales_territories/sales_person_list/{id}(id=${territory.territoryid})}"
+										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+									<td><a th:href="@{/sales_territories/sales_territory_history_list/{id}(id=${territory.territoryid})}"
+										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+
 									<td class="text-info" th:text="${territory.territoryid}"></td>
 									<td class="text-info" th:text="${territory.name}"></td>
 									<td class="text-info" th:text="${territory.countryregioncode}"></td>

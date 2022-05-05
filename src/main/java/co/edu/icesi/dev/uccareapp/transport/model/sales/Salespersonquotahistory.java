@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PositiveOrZero;
 
 /**
  * The persistent class for the salespersonquotahistory database table.
@@ -34,8 +36,17 @@ public class Salespersonquotahistory implements Serializable {
 
 	private Integer rowguid;
 
+	@NotNull
+	@PositiveOrZero
 	private BigDecimal salesquota;
 
+	// bi-directional many-to-one association to Salesperson
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "businessentityid")
+	private Salesperson salesperson;
+		
+		
 	public Salesperson getSalesperson() {
 		return salesperson;
 	}
@@ -44,10 +55,7 @@ public class Salespersonquotahistory implements Serializable {
 		this.salesperson = salesperson;
 	}
 
-	// bi-directional many-to-one association to Salesperson
-	@ManyToOne
-	@JoinColumn(name = "businessentityid")
-	private Salesperson salesperson;
+	
 
 	public Salespersonquotahistory() {
 	}

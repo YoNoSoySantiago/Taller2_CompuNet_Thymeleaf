@@ -20,7 +20,7 @@
 		<h2 class="mb-5">Edit Sales Territory</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/sales_territories/edit/{id}(id=${salesterritory.territoryid})}" th:object="${salesterritory}"
+				<form action="#" th:object="${salesterritory}"
 					method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
@@ -29,29 +29,22 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="name" class="col-form-label">Territory name:</label> 
-							<input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Ej: TR-SH"> 
-							<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+							<input disabled type="text" th:field="*{name}" class="form-control" id="name" placeholder="Ej: TR-SH"> 
 						</div>
-						<div class="form-group col-md-6">
-							<label for="type" class="col-form-label">Country Code</label> 
-							<select class="form-control-range" th:field="*{countryregioncode}">
-								<option class="form-control" th:each="countryRegion : ${countries_region}" th:value="${countryRegion.countryregioncode}" 
-								 th:text="${countryRegion.name}" th:selected="${salesterritory.countryregioncode=countryRegion.countryregioncode}" ></option>
-							</select>
+                        <div class="form-group col-md-6">
+							<label for="name" class="col-form-label">Country Code:</label> 
+							<input disabled type="text" th:field="*{countryregioncode}" class="form-control" id="countryregioncode" placeholder="Ej: TR-SH"> 
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Update">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="reset" class="btn btn-secondary" value="Clear">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
-						</div>
-					</div>
+					
 				</form>
+				<div class="row">
+					<div class="col-md-3 mt-3">
+						<button class="btn btn-secondary" >
+							<a th:href="${back}">Back</a>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

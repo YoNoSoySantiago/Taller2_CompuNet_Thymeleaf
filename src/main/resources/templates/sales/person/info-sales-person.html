@@ -24,37 +24,30 @@
 							<label  for="businessentityid" class="col-form-label">Sales Person ID</label> 
 							<input disabled type="text" th:field="*{businessentityid}" class="form-control" id="businessentityid" placeholder="Ej: 650000"> 
 						</div>
-						<div class="form-group col-md-6">
-							<label for="type" class="col-form-label">Sales Territory</label> 
-							<select class="form-control-range" th:field="*{salesterritory}">
-								<option th:each="territory : ${territories}" th:value="${territory.territoryid}" 
-								class="form-control" th:text="${territory.territoryid}" th:selected="${salesperson.salesterritory=territory}" ></option>
-							</select>
-							<span th:if="${#fields.hasErrors('salesterritory')}" th:errors="*{salesterritory}" class="text-danger"></span>
+			
+                        <div class="form-group col-md-6">
+							<label for="salesquota" class="col-form-label">Sales Quota</label> 
+							<input disabled type="text" th:field="*{salesterritory.territoryid}" class="form-control" id="salesquota" placeholder="Ej: 650000"> 
 						</div>
+
 						<div class="form-group col-md-6">
 							<label for="salesquota" class="col-form-label">Sales Quota</label> 
-							<input type="text" th:field="*{salesquota}" class="form-control" id="salesquota" placeholder="Ej: 650000"> 
-							<span th:if="${#fields.hasErrors('salesquota')}" th:errors="*{salesquota}" class="text-danger"></span>
+							<input disabled type="text" th:field="*{salesquota}" class="form-control" id="salesquota" placeholder="Ej: 650000"> 
 						</div>
+
 						<div class="form-group col-md-6">
 							<label for="commissionpct" class="col-form-label">Commission PCT</label> 
-							<input type="text" th:field="*{commissionpct}" class="form-control" id="commissionpct" placeholder="Ej: 150000"> 
-							<span th:if="${#fields.hasErrors('commissionpct')}" th:errors="*{commissionpct}" class="text-danger"></span>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4 mt-3">
-							<input type="submit" name="action" class="btn btn-primary" value="Update">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="reset" class="btn btn-secondary" value="Clear">
-						</div>
-						<div class="col-md-3 mt-3">
-							<input type="submit" name="action" class="btn btn-secondary" value="Cancel">
+							<input disabled type="text" th:field="*{commissionpct}" class="form-control" id="commissionpct" placeholder="Ej: 150000"> 
 						</div>
 					</div>
 				</form>
+                <div class="row">
+					<div class="col-md-3 mt-3">
+						<button class="btn btn-secondary" >
+							<a th:href="${back}">Back</a>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -11,6 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * The persistent class for the salesperson database table.
@@ -25,7 +30,10 @@ public class Salesperson implements Serializable {
 	private Integer businessentityid;
 
 	private BigDecimal bonus;
-
+	
+	@NotNull
+	@Min(value=0)
+	@Max(value=1)
 	private BigDecimal commissionpct;
 
 	private Timestamp modifieddate;
@@ -33,7 +41,9 @@ public class Salesperson implements Serializable {
 	private Integer rowguid;
 
 	private BigDecimal saleslastyear;
-
+	
+	@NotNull
+	@Min(value=0)
 	private BigDecimal salesquota;
 
 	private BigDecimal salesytd;
@@ -43,6 +53,7 @@ public class Salesperson implements Serializable {
 	private List<Salesorderheader> salesorderheaders;
 
 	// bi-directional many-to-one association to Salesterritory
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "territoryid")
 	private Salesterritory salesterritory;
@@ -59,8 +70,7 @@ public class Salesperson implements Serializable {
 	@OneToMany(mappedBy = "salesperson")
 	private List<Store> stores;
 
-	public Salesperson() {
-	}
+	public Salesperson() {}
 
 	public Salesorderheader addSalesorderheader(Salesorderheader salesorderheader) {
 		getSalesorderheaders().add(salesorderheader);

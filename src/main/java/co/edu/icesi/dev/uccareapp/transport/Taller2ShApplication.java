@@ -13,8 +13,8 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import co.edu.icesi.dev.uccareapp.transport.model.person.Businessentity;
 import co.edu.icesi.dev.uccareapp.transport.model.person.Countryregion;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.UserApp;
-import co.edu.icesi.dev.uccareapp.transport.model.sales.UserType;
+import co.edu.icesi.dev.uccareapp.transport.model.UserApp;
+import co.edu.icesi.dev.uccareapp.transport.model.UserType;
 import co.edu.icesi.dev.uccareapp.transport.repository.BusinessentityRepository;
 import co.edu.icesi.dev.uccareapp.transport.repository.CountryRegionRepository;
 import co.edu.icesi.dev.uccareapp.transport.repository.UserRepository;
@@ -36,12 +36,12 @@ public class Taller2ShApplication {
 		return (args->{
 			UserApp userAdmin = new UserApp();
 			userAdmin.setUsername("YoNoSoySantiago");
-			userAdmin.setPassword("123456789");
+			userAdmin.setPassword("{noop}123456789");
 			userAdmin.setType(UserType.admin);
 			
 			UserApp userOp = new UserApp();
 			userOp.setUsername("Cpasuy06");
-			userOp.setPassword("987654321");
+			userOp.setPassword("{noop}987654321");
 			userOp.setType(UserType.operator);
 			
 			userRepository.save(userAdmin);

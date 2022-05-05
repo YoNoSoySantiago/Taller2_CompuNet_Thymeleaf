@@ -18,22 +18,23 @@
 		<h2 class="mb-5">Add Sales Person</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/sales_persons/add/}" th:object="${sales_person}" method="post">
+				<form action="#" th:action="@{/sales_persons/add/}" th:object="${salesperson}" method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="type" class="col-form-label">Business Entity</label> 
 							<select class="form-control-range" th:field="*{businessentityid}">
 								<option class="form-control" th:value="-1" th:selected="-1">Create New Business Entity</option>
 								<option th:each="businessentity_id : ${businessentities_ids}" th:value="${businessentity_id}" 
-								class="form-control" th:text="${businessentity_id}" th:selected="${sales_person.businessentityid=businessentity_id}"></option>
+								class="form-control" th:text="${businessentity_id}" th:selected="${salesperson.businessentityid=businessentity_id}"></option>
 							</select>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="type" class="col-form-label">Sales Territory</label> 
 							<select class="form-control-range" th:field="*{salesterritory}">
 								<option th:each="territory : ${territories}" th:value="${territory.territoryid}" 
-								class="form-control" th:text="${territory.territoryid}" th:selected="${sales_person.salesterritory=territory}" ></option>
+								class="form-control" th:text="${territory.territoryid}" th:selected="${salesperson.salesterritory=territory}" ></option>
 							</select>
+							<span th:if="${#fields.hasErrors('salesterritory')}" th:errors="*{salesterritory}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="salesquota" class="col-form-label">Sales Quota</label> 
