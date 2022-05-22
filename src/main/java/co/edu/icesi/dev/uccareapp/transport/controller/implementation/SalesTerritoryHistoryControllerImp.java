@@ -46,6 +46,7 @@ public class SalesTerritoryHistoryControllerImp {
 	
 	@GetMapping("/sales_territories_history/add")
 	public String addSalesTerritory(Model model) {
+		model.addAttribute("error", "");
 		model.addAttribute("salesterritoryhistory", new Salesterritoryhistory());
 		model.addAttribute("sales_persons", salesPersonRepository.findAll());
 		model.addAttribute("sales_territories", salesTerritoryRepository.findAll());
@@ -78,19 +79,11 @@ public class SalesTerritoryHistoryControllerImp {
 				bindingResult.addError(new ObjectError("enddate", "value is no valid"));
 			}
 			try {
-				if(startdate!=null) {
-					if(startdate.isAfter(LocalDateTime.now())) {
-						bindingResult.addError(new ObjectError("startdate", "start date must to be lower than the current date"));
-					}
-				}
 				
-				if(enddate!=null) {
-					if(enddate.isBefore(startdate)) {
-						bindingResult.addError(new ObjectError("enddate", "end date must to be higger than the start date"));
-					}
-				}
 				
 				if(bindingResult.hasErrors()) {
+					System.out.println("HEREEEEEE");
+					model.addAttribute("error", "");
 					model.addAttribute("salesterritoryhistory", salesTerritoryHistory);
 					model.addAttribute("sales_persons", salesPersonRepository.findAll());
 					model.addAttribute("sales_territories", salesTerritoryRepository.findAll());
@@ -102,7 +95,11 @@ public class SalesTerritoryHistoryControllerImp {
 						salesTerritoryHistory.getSalesPersonTerritoryHistory().getBusinessentityid(),
 						salesTerritoryHistory.getSalesTerritory().getTerritoryid());
 			} catch (InvalidValueException | ObjectDoesNotExistException | ObjectAlreadyExistException e) {
-				e.printStackTrace();
+				model.addAttribute("error",e.getMessage());
+				model.addAttribute("salesterritoryhistory", salesTerritoryHistory);
+				model.addAttribute("sales_persons", salesPersonRepository.findAll());
+				model.addAttribute("sales_territories", salesTerritoryRepository.findAll());
+				return "history/territory/add-sales-territory-history";
 			}
 		}
 		return "redirect:/sales_territories_history";

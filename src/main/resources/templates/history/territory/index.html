@@ -38,11 +38,13 @@
 									<td class="text-info" th:text="${territory_history.id}"></td>
 									<td class="text-info" >
 										<a th:text="${territory_history.salesPersonTerritoryHistory.businessentityid}"
-										th:href="@{/sales_territories_history/sales_person_info/{id}(id=${territory_history.salesPersonTerritoryHistory.businessentityid})}"></a>
+										th:href="@{/sales_territories_history/sales_person_info/{id}(id=${territory_history.salesPersonTerritoryHistory.businessentityid})}"
+										style="color: red"></a>
 									</td>
 									<td class="text-info">
 										<a th:text="${territory_history.salesTerritory.territoryid}"
-										th:href="@{/sales_territories_history/sales_territory_info/{id}(id=${territory_history.salesTerritory.territoryid})}"></a>
+										th:href="@{/sales_territories_history/sales_territory_info/{id}(id=${territory_history.salesTerritory.territoryid})}"
+										style="color: red"></a>
 									</td>
 									<td class="text-info" th:text="${territory_history.startdate}"></td>
 									<td class="text-info" th:text="${territory_history.enddate}"></td>
@@ -51,6 +53,7 @@
 										class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 									<td><a th:href="@{/sales_territories_history/del/{id}(id=${territory_history.id})}"
 										class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+									
 								</tr>
 							</tbody>
 						</table>

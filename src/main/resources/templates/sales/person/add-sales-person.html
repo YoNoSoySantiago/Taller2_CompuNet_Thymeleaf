@@ -24,8 +24,8 @@
 							<label for="type" class="col-form-label">Business Entity</label> 
 							<select class="form-control-range" th:field="*{businessentityid}">
 								<option class="form-control" th:value="-1" th:selected="-1">Create New Business Entity</option>
-								<option th:each="businessentity_id : ${businessentities_ids}" th:value="${businessentity_id}" 
-								class="form-control" th:text="${businessentity_id}" th:selected="${salesperson.businessentityid=businessentity_id}"></option>
+								<option th:each="businessentity : ${businessentities}" th:value="${businessentity.businessentityid}" 
+								class="form-control" th:text="${businessentity.businessentityid}" th:selected="${salesperson.businessentityid=businessentity.businessentityid}"></option>
 							</select>
 						</div>
 						<div class="form-group col-md-6">

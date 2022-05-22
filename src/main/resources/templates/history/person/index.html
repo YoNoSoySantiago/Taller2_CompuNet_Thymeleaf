@@ -37,7 +37,8 @@
 								
 								<td class="text-info" >
 									<a th:text="${person_history.salesperson.businessentityid}" 
-									th:href="@{/sales_persons_history/sales_person_info/{id}(id=${person_history.salesperson.businessentityid})}"></a>
+									th:href="@{/sales_persons_history/sales_person_info/{id}(id=${person_history.salesperson.businessentityid})}"
+									style="color: red">
 									</a>
 								</td>
 								<td class="text-info" th:text="${person_history.salesquota}"></td>

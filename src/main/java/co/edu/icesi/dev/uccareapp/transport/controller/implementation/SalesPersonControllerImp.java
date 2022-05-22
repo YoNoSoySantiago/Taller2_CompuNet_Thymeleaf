@@ -22,6 +22,7 @@ import co.edu.icesi.dev.uccareapp.transport.model.person.Businessentity;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesperson;
 import co.edu.icesi.dev.uccareapp.transport.model.sales.Salesterritory;
 import co.edu.icesi.dev.uccareapp.transport.repository.BusinessentityRepository;
+import co.edu.icesi.dev.uccareapp.transport.repository.SalesPersonRepository;
 import co.edu.icesi.dev.uccareapp.transport.repository.SalesTerritoryRepository;
 import co.edu.icesi.dev.uccareapp.transport.service.implementation.SalesPersonServiceImp;
 import co.edu.icesi.dev.uccareapp.transport.service.interfaces.SalesPersonService;
@@ -60,13 +61,24 @@ public class SalesPersonControllerImp {
 	public String addSalesPerson(Model model) {
 		
 		Iterable<Businessentity> entities =	businessentityRepository.findAll();
-		List<Integer> bussinessentities_ids =  new ArrayList<Integer>();
-		for(Businessentity entity : entities) {
-			bussinessentities_ids.add(entity.getBusinessentityid());
+		Iterable<Salesperson> salesPersons =  salesPersonService.findAll();
+		List<Businessentity> final_entities = new ArrayList<>();
+		final_entities.iterator();
+		for(Businessentity be:entities ) {
+			boolean nel = true;
+			for(Salesperson sp:salesPersons) {
+				if(be.getBusinessentityid().equals(sp.getBusinessentityid())) {
+					nel = false;
+					break;
+				}
+			}
+			if(nel) {
+				final_entities.add(be);
+			}
 		}
 		Iterable<Salesterritory> territories = salesTerritoryRepository.findAll();
 		
-		model.addAttribute("businessentities_ids", bussinessentities_ids.iterator());
+		model.addAttribute("businessentities", final_entities.iterator());
 		model.addAttribute("territories", territories.iterator());
 		model.addAttribute("salesperson", new Salesperson());
 		return "sales/person/add-sales-person";

@@ -49,7 +49,7 @@ public class SalesTerritoryHistoryServiceImp implements SalesTerritoryHistorySer
 			throw new InvalidValueException("The end date have to be lower than the current date");
 		}
 		if(salesTerritoryHistory.getStartdate().compareTo(salesTerritoryHistory.getEnddate())>=0) {
-			throw new InvalidValueException("The moddified data no should be equals or higgier to the end data");
+			throw new InvalidValueException("The start data no should be equals or higgier to the end data");
 		}
 		if(opSalesPerson.isEmpty()) {
 			throw new ObjectDoesNotExistException("this sales person does not exist");

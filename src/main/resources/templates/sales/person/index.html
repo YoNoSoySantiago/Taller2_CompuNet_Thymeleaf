@@ -35,15 +35,18 @@
 						<tbody>
 							<tr th:each="sales_person : ${sales_persons}">
 								<td><a th:href="@{/sales_persons/sales_person_quota_history_list/{id}(id=${sales_person.businessentityid})}"
-									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a>
+									class="btn btn-primary"><i class="far fa-bullseye"></i></a>
 								</td>
 								<td><a th:href="@{/sales_persons/sales_territory_history_list/{id}(id=${sales_person.businessentityid})}"
-										class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a>
+									class="btn btn-primary"><i class="far fa-bullseye"></i></a>
 								</td>
 								<td class="text-info" th:text="${sales_person.businessentityid}"></td>
 								
 								<td class="text-info" >
-									<a th:text="${sales_person.salesterritory.territoryid}" th:href="@{/sales_persons/sales_territory_info/{id}(id=${sales_person.salesterritory.territoryid})}"></a>
+									<a th:text="${sales_person.salesterritory.territoryid}" 
+										th:href="@{/sales_persons/sales_territory_info/{id}(id=${sales_person.salesterritory.territoryid})}"
+										style="color: red">
+									</a>
 								</td>
 								
 								<td class="text-info" th:text="${sales_person.salesquota}"></td>
